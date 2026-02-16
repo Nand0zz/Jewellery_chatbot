@@ -3,11 +3,10 @@
 import React from "react"
 
 import { useRef, useEffect, useState } from "react";
-import { Sidebar } from "@/components/Sidebar";
 import { ChatMessage } from "@/components/ChatMessage";
 import { CATALOG, filterProducts, searchCatalog } from "@/lib/catalog";
 import { extractUserPreferences, getBotResponse } from "@/lib/conversation";
-import { Send, Mic, Menu, X } from "lucide-react";
+import { Send, Mic } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -41,7 +40,6 @@ export default function Home() {
   });
   const [cart, setCart] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -208,20 +206,11 @@ Images for these have been shown to the user.`;
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background-light dark:bg-background-dark">
-      {/* Sidebar */}
-      {sidebarOpen && <Sidebar profile={profile} cart={cart} onClose={() => setSidebarOpen(false)} />}
-
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-full relative overflow-hidden">
+      <main className="flex-1 flex flex-col h-full relative overflow-hidden w-full">
         {/* Top Nav */}
         <header className="flex items-center justify-between px-8 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-30 border-b border-[#f3e7e9] dark:border-[#3a2024]">
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 hover:bg-surface-light dark:hover:bg-surface-dark rounded-lg transition-colors"
-            >
-              {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
             <span className="text-primary text-3xl">✨</span>
             <h2 className="text-xl font-bold tracking-tight">Lumina</h2>
           </div>
